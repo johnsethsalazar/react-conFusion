@@ -1,15 +1,60 @@
 import React, {Component} from "react";
-import {Navbar, NavbarBrand, Jumbotron} from 'reactstrap';
+import {Navbar, NavbarBrand, Jumbotron, Nav, NavbarToggler, Collapse, NavItem} from 'reactstrap';
+import { NavLink } from "react-router-dom";
 
 //<></> or <React.Fragment></React.Fragment>
 
 class Header extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            isNavOpen: false //A state that renders a mobile nav bar to collapse initially. When <NavbarToggler onClick={this.toggleNav} /> the value of this state will be changed. See <Collapse isOpen={this.state.isNavOpen} navbar>
+        }
+        //Binding - This toggleNav is now pointing/binding to toggleNav() function.  
+        this.toggleNav = this.toggleNav.bind(this)
+    }
+
+    //changes isNavOpen state to true or false.
+    toggleNav(){
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
+    }
+
     render(){
         return(
             <>
-            <Navbar dark>
+            <Navbar dark expand="md">
                 <div className='container'>
-                    <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNav} />
+                    <NavbarBrand className="mr-auto" href="/">
+                        <img src="assets/images/logo.png" height="30" width="41" alt="Ristorante Con Fusion" />
+                    </NavbarBrand>
+                    <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Nav navbar>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/home">
+                                    <span className="fa fa-home fa-lg"></span>Home
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/aboutus">
+                                    <span className="fa fa-info fa-lg"></span>About Us
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/menu">
+                                    <span className="fa fa-list fa-lg"></span>Menu
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/contactus">
+                                    <span className="fa fa-address-card fa-lg"></span>Contact Us
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
                 </div>
             </Navbar>
             <Jumbotron>
