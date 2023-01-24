@@ -32,6 +32,18 @@ address{
   background-color: #512DA8;
 }
 
+.fade{
+  opacity: 1;
+}
+
+.modal{
+  background: #00000085;
+}
+
+.modal-dialog{
+  margin: 5.75rem auto;
+}
+
 /* .App {
   text-align: center;
 }
